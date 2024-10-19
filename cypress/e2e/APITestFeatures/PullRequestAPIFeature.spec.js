@@ -3,7 +3,7 @@ describe('Pull Requests via API', () => {
     const owner = 'ApoorvaTraining'; // replace with your GitHub username or organization
     const repo = 'Cypress_Automation'; // replace with your repository name
     const baseBranch = 'main'; // base branch you want to merge into
-    const headBranch = 'PullRequestFeature'; // branch you want to merge from
+    const headBranch = 'api_automation_tests'; // branch you want to merge from
   
     it('should create a new pull request', () => {
       const pullRequestTitle = 'Automated Pull Request';
@@ -35,9 +35,9 @@ describe('Pull Requests via API', () => {
       });
     });
   
-    it('should verify the created pull request', () => {
+    it.only('should verify the created pull request', () => {
       // Assume the pull request number was stored during creation
-      const pullRequestNumber = 1; // replace with the actual pull request number if needed
+      const pullRequestNumber = 8; // replace with the actual pull request number if needed
   
       cy.request({
         method: 'GET',

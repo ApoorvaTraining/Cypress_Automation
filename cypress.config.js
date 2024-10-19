@@ -11,7 +11,10 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
 
-    specPattern: 'cypress/e2e/**/*.spec.js',
+    specPattern: [
+      'cypress/e2e/**/*.cy.js', // UI tests
+      'cypress/e2e/**/*.spec.js' // API tests
+    ],
 
     reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
