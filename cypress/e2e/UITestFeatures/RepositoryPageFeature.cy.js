@@ -44,10 +44,10 @@ describe('GitHub Repository Creation', () => {
         cy.url().should('include', `/${privateRepoName}`);
     });
 
-    it('should not allow creating a repository without a name', () => {
-        cy.xpath('//span[@class="Button-label" and text()="New"]').first().click(); // Click on 'New' repository button
+    it.only('should not allow creating a repository without a name', () => {
+        repoPage.buttonNew().first().click(); // Click on 'New' repository button
  
-        cy.get('button[type="submit"]:contains("Create repository")')
+        repoPage.buttonCreateRespository()
         .scrollIntoView()
         .should('be.visible')
         .click(); // Attempt to create without a name
@@ -57,7 +57,7 @@ describe('GitHub Repository Creation', () => {
         //cy.get('.flash-error').should('be.visible').and('contain', 'Repository name is required');
     });
     
-    it.only('should display an error for an invalid repository name', () => {
+    it('should display an error for an invalid repository name', () => {
         const invalidRepoName = 'Invalid/Repo*Name'; // Example of an invalid name
         
         repoPage.createNewRepository(invalidRepoName, false);
