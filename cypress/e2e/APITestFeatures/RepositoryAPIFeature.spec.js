@@ -88,7 +88,6 @@ describe('GitHub API Tests - Create a New Repository', () => {
             expect(response.body).to.have.property('name', repo);
             expect(response.body).to.have.property('owner');
             expect(response.body.owner).to.have.property('login', owner);
-      // Add other assertions as needed
     });
   });
 
