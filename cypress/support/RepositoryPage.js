@@ -3,6 +3,15 @@ class RepositoryPage {
       cy.visit('https://github.com/');
     }
 
+    buttonNew(){
+     return cy.xpath('//span[@class="Button-label" and text()="New"]');
+
+    }
+
+    buttonCreateRespository(){
+     return cy.get('button[type="submit"]:contains("Create repository")');
+    }
+
     createNewRepository(repoName, isPrivate) {
 
         //cy.wait(1000);

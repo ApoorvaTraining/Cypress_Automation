@@ -18,29 +18,29 @@ describe('GitHub sign-up Process with New User', () => {
             const emailAddress = inbox.emailAddress;  // Capture the generated email address
     
             // Step 2: Visit GitHub and sign up with the generated email
-            cy.visit('https://github.com/');
-            cy.get('.HeaderMenu-link--sign-up').click(); // Click on "Sign up"
+            githubPage.visit();
+            githubPage.clickSignUp(); // Click on "Sign up"
     
             // Helper function to click the "Continue" button based on index
             const clickContinueButton = (index) => {
-                cy.xpath("//button[contains(text(), 'Continue') and @type='button']")
+                githubPage.continueButton()
                     .eq(index) // Use eq(index) to select the button by its index
                     .should('be.enabled') // Ensure the button is enabled before clicking
                     .click({ force: true });
             };
     
             // Step 3: Fill in the email and click Continue
-            cy.get('#email').type(emailAddress, { force: true });
+            githubPage.clickEmail().type(emailAddress, { force: true });
             clickContinueButton(0);
     
             // Step 4: Fill in the password and click Continue
-            cy.get('#password').type('YourSecurePassword', { force: true });
+            githubPage.clickPassword().type('YourSecurePassword', { force: true });
             clickContinueButton(1);
 
             cy.wait(10000);
     
             // Step 5: Fill in the username and click Continue
-            cy.get('#login').type(uniqueUsername);
+            githubPage.clickUserName().type(uniqueUsername);
             cy.wait(6000); // Wait for 1 second to ensure the username is fully entered
             clickContinueButton(2);
     
@@ -84,11 +84,11 @@ describe('GitHub sign-up Process with New User', () => {
     })
 
     it('should not enable the Continue button when email field is empty', () => {
-        cy.visit('https://github.com/');
-        cy.get('.HeaderMenu-link--sign-up').click();
+        githubPage.visit();
+        githubPage.clickSignUp();
     
         // Check that the Continue button is disabled when email is empty
-        cy.xpath("//button[contains(text(), 'Continue') and @type='button']")
+        githubPage.continueButton()
           .first()
           .should('be.disabled');  // Assert that the button is disabled
     });
@@ -96,11 +96,11 @@ describe('GitHub sign-up Process with New User', () => {
     it('should display an error for invalid email format', () => {
 
         const githubPage = new GitHubPage();
-        cy.visit('https://github.com/');
-        cy.get('.HeaderMenu-link--sign-up').click();
+        githubPage.visit();
+        githubPage.clickSignUp();
     
         // Enter an invalid email format
-        cy.get('#email').type('invalidemail@gmai#com', { force: true });
+        githubPage.clickEmail().type('invalidemail@gmai#com', { force: true });
        
     
         // Assert that an error message for invalid email format is displayed
@@ -111,16 +111,16 @@ describe('GitHub sign-up Process with New User', () => {
     it('should display an error for a short password', () => {
         const githubPage = new GitHubPage();
         
-        cy.visit('https://github.com/');
-        cy.get('.HeaderMenu-link--sign-up').click();
+        githubPage.visit();
+        githubPage.clickSignUp();
     
         // Fill in the email and click Continue
-        cy.get('#email').type('validemail@example.com', { force: true }).then(() => {
-            cy.xpath("//button[contains(text(), 'Continue') and @type='button']").first().click({ force: true });
+        githubPage.clickEmail().type('validemail@example.com', { force: true }).then(() => {
+            githubPage.continueButton().first().click({ force: true });
         });
     
         // Enter a short password and click Continue
-        cy.get('#password').type('123', { force: true }).then(() => {
+        githubPage.clickPassword().type('123', { force: true }).then(() => {
       
         // Assert that the error message for short password is displayed
             githubPage.verifyPassworderrorMessage('Password is too short')
@@ -129,22 +129,22 @@ describe('GitHub sign-up Process with New User', () => {
     });
 
 
-    it.only('should display an error for a username that is already taken', () => {
+    it('should display an error for a username that is already taken', () => {
 
         const githubPage = new GitHubPage();
-        cy.visit('https://github.com/');
-        cy.get('.HeaderMenu-link--sign-up').click();
+        githubPage.visit();
+        githubPage.clickSignUp();
     
         // Fill in the email and click Continue
-        cy.get('#email').type('validemail@example.com', { force: true });
-        cy.xpath("//button[contains(text(), 'Continue') and @type='button']").first().click({ force: true });
+        githubPage.clickEmail().type('validemail@example.com', { force: true });
+        githubPage.continueButton().first().click({ force: true });
     
         // Fill in the password and click Continue
-        cy.get('#password').type('YourSecurePassword123', { force: true });
-        cy.xpath("//button[contains(text(), 'Continue') and @type='button']").eq(1).click({ force: true });
+        githubPage.clickPassword().type('YourSecurePassword123', { force: true });
+        githubPage.continueButton().eq(1).click({ force: true });
     
         // Enter a username that is already taken
-        cy.get('#login').type('test65', { force: true }).then(() =>
+        githubPage.clickUserName().type('test65', { force: true }).then(() =>
         {
             // Assert that an error message is displayed for username already taken
             githubPage.verifyUsernameErrorMessage('Username test65 is not available.');

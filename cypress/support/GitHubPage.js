@@ -6,6 +6,27 @@ class GitHubPage {
     clickSignIn() {
       cy.get('.text-right > .HeaderMenu-link').click();
     }
+
+    clickSignUp() {
+      cy.get('.HeaderMenu-link--sign-up').click();
+    }
+
+    continueButton(){
+      return cy.xpath("//button[contains(text(), 'Continue') and @type='button']");
+    }
+
+    clickEmail(){
+       return cy.get('#email');
+    }
+
+    clickPassword(){
+      return cy.get('#password');
+    }
+  
+    clickUserName(){
+      return cy.get('#login');
+    }
+  
   
     enterCredentials(email, password) {
       cy.get('#login_field').type(email);
