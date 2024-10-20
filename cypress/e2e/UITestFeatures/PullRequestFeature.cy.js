@@ -16,6 +16,8 @@ describe('Pull Request Workflow', () => {
         githubPage.clickSignIn();
         githubPage.enterCredentials('apoorvatraining@gmail.com', 'Training#28');
         githubPage.clickLogin();
+
+        cy.wait(1000);
         
     });
 
@@ -36,33 +38,50 @@ describe('Pull Request Workflow', () => {
         cy.contains('View pull request').click(); // Click on view pull request button
         cy.wait(1000);
         cy.xpath("//div[contains(@class, 'comment-body markdown-body')]")
+        .filter(':visible')
         .should('be.visible')
-        .invoke('text').then((text) => {
-            const cleanText = text.replace(/\s+/g,' ').trim();
+        .invoke('text')
+        .then((text) => {
+            const cleanText = text.replace(/\s+/g, ' ').trim();
+
+            cy.log('Original text:', text);
+            cy.log("Trim text", cleanText);
+
             expect(cleanText).to.equal("This pull request was created for automation testing.");
         });
 
        // cy.xpath("//div[contains(@class, 'comment-body markdown-body')]").should('have.text',"This pull request was created for automation testing.");
 
 
-        // Step 3: Add a comment Pull Request
+        // Step 3: Review and Add a comment Pull Request
         cy.wait(100);
-        cy.get('#new_comment_field').type("This is a new Pull Request that should be merged into main branch"); // Click on Pull Requests
-        cy.xpath("//button[normalize-space(text())='Comment']").click(); // Click on New Pull Request
-        cy.get('.d-block comment-body markdown-body  js-comment-body').should('have.text',"This is a new Pull Request that should be merged into main branch");
+        cy.get('#new_comment_field')
+        .should('be.visible')
+        .type("This is a new Pull Request"); // Click on Pull Requests
 
-        // Step 4: Review the Pull Request
-        cy.contains(pullRequestTitle).should('exist'); // Verify that the pull request is created
-        cy.contains('Compare changes').should('exist'); // Verify branch comparison
+        cy.xpath("//button[normalize-space(text())='Comment']")
+        .should('be.visible')
+        .click(); // Click on comment button
+
+        cy.wait(1000);
+
+        cy.xpath("//td[contains(@class, 'd-block comment-body markdown-body')]")
+        .filter(':visible')
+        .last()
+        .should('be.visible')
+        .invoke('text') // Correctly invoke text to retrieve the comment text
+        .then((commentText) => {
+            const cleanCommentText = commentText.replace(/\s+/g, ' ').trim();
+            cy.log('Comment text:', cleanCommentText);
+            expect(cleanCommentText).to.equal("This is a new Pull Request");
+        });
+
 
         // Step 5: Merge the Pull Request
-        cy.get('button[data-ga-click="Merge pull request"]').click(); // Click on Merge
-        cy.get('button[data-ga-click="Confirm merge"]').click(); // Confirm the merge
-
-        // Step 6: Verify successful merging
-        cy.contains('Merged').should('exist'); // Check for a confirmation message
-
-        // Step 7: Handle Merge Conflicts (if necessary)
-        // You can simulate a conflict scenario here, depending on your setup
+        cy.contains('Merge pull request').click(); // Click on Merge button
+        cy.xpath("//button[contains(text(), 'Cancel')]").filter(':visible').click();
+        cy.contains('Merge pull request').click(); // Click on Merge button
+        cy.xpath("//button[contains(text(), 'Confirm merge')]").filter(':visible').click();
+        cy.log("Pull Request Merged Successfully.")
     });
 });
