@@ -3,7 +3,7 @@ const PullRequestPage = require('../../support/PullRequestPage');
 
 describe('Pull Request Workflow', () => {
     const repoName = 'Cypress_Automation'; // Replace with your repository name
-    const branchName = 'feature/test-pull-request'; // Replace with your feature branch name
+    const branchName = 'PullRequestFeature'; // Replace with your feature branch name
     const baseBranch = 'main'; // Replace with the base branch to merge into
     const pullRequestTitle = 'Test Pull Request';
     const pullRequestDescription = 'This is a test pull request for Cypress automation.';
@@ -12,10 +12,14 @@ describe('Pull Request Workflow', () => {
         // Step 1: Navigate to the Repository
         cy.visit(`https://github.com/ApoorvaTraining/${repoName}`); // Replace with your user/repo
 
+        //Navigate to pull Request:
+        cy.get('[data-content="Pull requests"]').click();
+
         // Step 2: Create a New Branch
-        cy.get('[data-content="Branch"]').click(); // Click on branch selector
-        cy.get('.branch-name').type(branchName);
-        cy.get('.branch-name').type('{enter}'); // Press enter to create the branch
+        cy.xpath("//span[contains(@class, 'd-none d-md-block') and text()='New pull request']").click();
+        cy.xpath("//summary[contains(@class, 'btn')]//span[contains(text(), 'main')][1]").click(); // Click on branch selector
+        cy.get("//span[contains(text(), 'PullRequestFeature')]").select(branchName);
+        //cy.get('.branch-name').type('{enter}'); // Press enter to create the branch
 
         // Simulate making changes and pushing to the new branch (this can vary)
         // This step may require API calls or direct interactions with the UI to add files and commit

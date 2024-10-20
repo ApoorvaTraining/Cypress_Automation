@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2024-10-18T20:03:18.105Z",
+    "end": "2024-10-18T20:03:27.311Z",
+    "duration": 9206,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "68e2838a-dbc0-4a9d-9384-cdb47e87f061",
+      "title": "",
+      "fullFile": "cypress\\e2e\\UITestFeatures\\PullRequestFeature.cy.js",
+      "file": "cypress\\e2e\\UITestFeatures\\PullRequestFeature.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4c176201-3c6a-4d97-a955-20cb61bdb3c3",
+          "title": "Pull Request Workflow",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should create, review, and merge a pull request",
+              "fullTitle": "Pull Request Workflow should create, review, and merge a pull request",
+              "timedOut": null,
+              "duration": 4957,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1: Navigate to the Repository\ncy.visit(`https://github.com/ApoorvaTraining/${repoName}`); // Replace with your user/repo\n//Navigate to pull Request:\ncy.get('[data-content=\"Pull requests\"]').click();\n// Step 2: Create a New Branch\ncy.xpath(\"//span[contains(@class, 'd-none d-md-block') and text()='New pull request']\").click();\ncy.xpath(\"//summary[contains(@class, 'btn')]//span[contains(text(), 'main')][1]\").click(); // Click on branch selector\ncy.get(\"//span[contains(text(), 'PullRequestFeature')]\").select(branchName);\n//cy.get('.branch-name').type('{enter}'); // Press enter to create the branch\n// Simulate making changes and pushing to the new branch (this can vary)\n// This step may require API calls or direct interactions with the UI to add files and commit\n// Step 3: Create a Pull Request\ncy.get('a[data-ga-click=\"Pull requests\"]').click(); // Click on Pull Requests\ncy.get('a[data-ga-click=\"New pull request\"]').click(); // Click on New Pull Request\ncy.get('.compare-branch').select(branchName); // Select the feature branch for comparison\ncy.get('#pull_request_title').type(pullRequestTitle); // Set the title\ncy.get('#pull_request_body').type(pullRequestDescription); // Set the description\ncy.get('button[data-ga-click=\"Create pull request\"]').click(); // Click on Create Pull Request\n// Step 4: Review the Pull Request\ncy.contains(pullRequestTitle).should('exist'); // Verify that the pull request is created\ncy.contains('Compare changes').should('exist'); // Verify branch comparison\n// Step 5: Merge the Pull Request\ncy.get('button[data-ga-click=\"Merge pull request\"]').click(); // Click on Merge\ncy.get('button[data-ga-click=\"Confirm merge\"]').click(); // Confirm the merge\n// Step 6: Verify successful merging\ncy.contains('Merged').should('exist'); // Check for a confirmation message\n// Step 7: Handle Merge Conflicts (if necessary)\n// You can simulate a conflict scenario here, depending on your setup",
+              "err": {
+                "message": "CypressError: `cy.click()` can only be called on a single element. Your subject contained 2 elements. Pass `{ multiple: true }` if you want to serially click each element.\n\nhttps://on.cypress.io/click",
+                "estack": "CypressError: `cy.click()` can only be called on a single element. Your subject contained 2 elements. Pass `{ multiple: true }` if you want to serially click each element.\n\nhttps://on.cypress.io/click\n    at mouseAction (https://github.com/__cypress/runner/cypress_runner.js:112555:68)\n    at Context.click (https://github.com/__cypress/runner/cypress_runner.js:112722:14)\n    at wrapped (https://github.com/__cypress/runner/cypress_runner.js:138145:19)\nFrom Your Spec Code:\n    at Context.eval (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/PullRequestFeature.cy.js:20:90)",
+                "diff": null
+              },
+              "uuid": "aff02dae-1e22-4956-9325-23773513587d",
+              "parentUUID": "4c176201-3c6a-4d97-a955-20cb61bdb3c3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "aff02dae-1e22-4956-9325-23773513587d"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 4957,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

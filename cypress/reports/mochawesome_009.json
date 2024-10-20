@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2024-10-18T20:12:00.277Z",
+    "end": "2024-10-18T20:12:21.766Z",
+    "duration": 21489,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e6589ab7-97c8-43ee-9a3e-3b2837306375",
+      "title": "",
+      "fullFile": "cypress\\e2e\\UITestFeatures\\RepositoryPageFeature.cy.js",
+      "file": "cypress\\e2e\\UITestFeatures\\RepositoryPageFeature.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4cd60257-fd02-4b8c-812a-88767d9e17cf",
+          "title": "GitHub Repository Creation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should display an error for an invalid repository name",
+              "fullTitle": "GitHub Repository Creation should display an error for an invalid repository name",
+              "timedOut": null,
+              "duration": 18369,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const invalidRepoName = 'Invalid/Repo*Name'; // Example of an invalid name\nrepoPage.createNewRepository(invalidRepoName, false);\n// Assert that an error message is displayed\nrepoPage.verifyReponameErrorMessage('The repository name can only contain ASCII letters, digits, and the characters ., -, and _.');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected '<span#RepoNameInput-message.Box-sc-g0xbh4-0.dfYMlS>' to contain 'The repository name can only contain ASCII letters, digits, and the characters ., -, and _.'",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected '<span#RepoNameInput-message.Box-sc-g0xbh4-0.dfYMlS>' to contain 'The repository name can only contain ASCII letters, digits, and the characters ., -, and _.'\n    at RepositoryPage.verifyReponameErrorMessage (webpack://github-ui-automation/./cypress/support/RepositoryPage.js:55:62)\n    at Context.eval (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/RepositoryPageFeature.cy.js:66:17)",
+                "diff": null
+              },
+              "uuid": "687f8556-062d-464e-b2f3-7c5b2a941400",
+              "parentUUID": "4cd60257-fd02-4b8c-812a-88767d9e17cf",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "687f8556-062d-464e-b2f3-7c5b2a941400"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 18369,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-10-18T20:04:02.072Z",
+    "end": "2024-10-18T20:04:12.451Z",
+    "duration": 10379,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "56965408-2864-42d5-a1bc-d0f4898bb714",
+      "title": "",
+      "fullFile": "cypress\\e2e\\UITestFeatures\\SignupPageFeature.cy.js",
+      "file": "cypress\\e2e\\UITestFeatures\\SignupPageFeature.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c9473065-5faf-4bce-9c68-40f0e7a79e2d",
+          "title": "GitHub sign-up Process with New User",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should display an error for a username that is already taken",
+              "fullTitle": "GitHub sign-up Process with New User should display an error for a username that is already taken",
+              "timedOut": null,
+              "duration": 5772,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const githubPage = new _GitHubPage.default();\ncy.visit('https://github.com/');\ncy.get('.HeaderMenu-link--sign-up').click();\n// Fill in the email and click Continue\ncy.get('#email').type('validemail@example.com', {\n  force: true\n});\ncy.xpath(\"//button[contains(text(), 'Continue') and @type='button']\").first().click({\n  force: true\n});\n// Fill in the password and click Continue\ncy.get('#password').type('YourSecurePassword123', {\n  force: true\n});\ncy.xpath(\"//button[contains(text(), 'Continue') and @type='button']\").eq(1).click({\n  force: true\n});\n// Enter a username that is already taken\ncy.get('#login').type('test65', {\n  force: true\n}).then(() => {\n  // Assert that an error message is displayed for username already taken\n  githubPage.verifyUsernameErrorMessage('Username test65 is not available.');\n});",
+              "err": {},
+              "uuid": "235a3ea4-7100-4a91-8a26-7654170f99db",
+              "parentUUID": "c9473065-5faf-4bce-9c68-40f0e7a79e2d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "235a3ea4-7100-4a91-8a26-7654170f99db"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5772,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

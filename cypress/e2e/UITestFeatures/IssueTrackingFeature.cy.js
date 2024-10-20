@@ -92,9 +92,6 @@ describe('GitHub Issue Tracking - UI Test', () => {
         //Select filter Assignee
         cy.xpath("//summary[contains(@class, 'btn-link') and contains(text(), 'Assignee')]").click()
         cy.xpath("(//a[contains(@class, 'SelectMenu-item') and contains(., 'ApoorvaTraining')])[2]").click({force: true});
-        //cy.get().select(assignee).click();
-
-
 
         // Verify the issue appears in the list
         cy.wait(1000);

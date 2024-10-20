@@ -1,0 +1,224 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 0,
+    "pending": 0,
+    "failures": 6,
+    "start": "2024-10-18T20:11:11.272Z",
+    "end": "2024-10-18T20:11:43.526Z",
+    "duration": 32254,
+    "testsRegistered": 6,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "090a5029-51a8-4ccb-812b-547ccc120ce0",
+      "title": "",
+      "fullFile": "cypress\\e2e\\UITestFeatures\\NavigationFeatures.cy.js",
+      "file": "cypress\\e2e\\UITestFeatures\\NavigationFeatures.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "30bff6c6-d185-4ef5-b1d5-9fbaf50546ea",
+          "title": "Navigation Between Repository Features",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should navigate to Code tab and verify content",
+              "fullTitle": "Navigation Between Repository Features should navigate to Code tab and verify content",
+              "timedOut": null,
+              "duration": 6757,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "verifyPageLoad('Code', '.file-navigation'); // Verify key content in \"Code\" tab",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Code']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Code']`, but never found it.\n    at verifyPageLoad (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:6:11)\n    at Context.eval (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:17:8)",
+                "diff": null
+              },
+              "uuid": "3e68a713-fb68-4a2d-b30c-f0f8298ae002",
+              "parentUUID": "30bff6c6-d185-4ef5-b1d5-9fbaf50546ea",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should navigate to Issues tab and verify content",
+              "fullTitle": "Navigation Between Repository Features should navigate to Issues tab and verify content",
+              "timedOut": null,
+              "duration": 4295,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "verifyPageLoad('Issues', '.js-issue-list'); // Verify key content in \"Issues\" tab",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Issues']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Issues']`, but never found it.\n    at verifyPageLoad (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:6:11)\n    at Context.eval (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:21:8)",
+                "diff": null
+              },
+              "uuid": "18941415-ff48-4a00-b03f-dfde6940eff3",
+              "parentUUID": "30bff6c6-d185-4ef5-b1d5-9fbaf50546ea",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should navigate to Pull Requests tab and verify content",
+              "fullTitle": "Navigation Between Repository Features should navigate to Pull Requests tab and verify content",
+              "timedOut": null,
+              "duration": 4261,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "verifyPageLoad('Pull requests', '.js-pull-request-list'); // Verify key content in \"Pull Requests\" tab",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Pull requests']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Pull requests']`, but never found it.\n    at verifyPageLoad (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:6:11)\n    at Context.eval (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:25:8)",
+                "diff": null
+              },
+              "uuid": "bf03a0af-6d77-485f-896f-1d1ec22d7cdb",
+              "parentUUID": "30bff6c6-d185-4ef5-b1d5-9fbaf50546ea",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should navigate to Actions tab and verify content",
+              "fullTitle": "Navigation Between Repository Features should navigate to Actions tab and verify content",
+              "timedOut": null,
+              "duration": 4377,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "verifyPageLoad('Actions', '.workflow-list'); // Verify key content in \"Actions\" tab",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Actions']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Actions']`, but never found it.\n    at verifyPageLoad (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:6:11)\n    at Context.eval (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:29:8)",
+                "diff": null
+              },
+              "uuid": "bd2188d4-76e0-4720-a576-65511beb3ab2",
+              "parentUUID": "30bff6c6-d185-4ef5-b1d5-9fbaf50546ea",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should verify pagination on Issues tab",
+              "fullTitle": "Navigation Between Repository Features should verify pagination on Issues tab",
+              "timedOut": null,
+              "duration": 4289,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(`a[title='Issues']`).click(); // Navigate to Issues tab\ncy.get('.pagination').should('exist'); // Check if pagination exists when applicable",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Issues']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Issues']`, but never found it.\n    at Context.eval (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:33:11)",
+                "diff": null
+              },
+              "uuid": "8aa0293c-6111-42f8-9a01-1dbac2969047",
+              "parentUUID": "30bff6c6-d185-4ef5-b1d5-9fbaf50546ea",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should ensure UI consistency across tabs",
+              "fullTitle": "Navigation Between Repository Features should ensure UI consistency across tabs",
+              "timedOut": null,
+              "duration": 4323,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const commonElements = ['.AppHeader', '.AppFooter'];\ncommonElements.forEach(selector => {\n  cy.get(`a[title='Code']`).click(); // Go to Code tab\n  cy.get(selector).should('be.visible'); // Check header and footer\n  cy.get(`a[title='Issues']`).click(); // Go to Issues tab\n  cy.get(selector).should('be.visible');\n  cy.get(`a[title='Pull requests']`).click(); // Go to Pull Requests tab\n  cy.get(selector).should('be.visible');\n  cy.get(`a[title='Actions']`).click(); // Go to Actions tab\n  cy.get(selector).should('be.visible');\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Code']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[title='Code']`, but never found it.\n    at eval (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:41:15)\nat Array.forEach (<anonymous>)\n    at Context.eval (webpack://github-ui-automation/./cypress/e2e/UITestFeatures/NavigationFeatures.cy.js:40:23)",
+                "diff": null
+              },
+              "uuid": "7dac491a-784d-430f-b384-910b7cc3538f",
+              "parentUUID": "30bff6c6-d185-4ef5-b1d5-9fbaf50546ea",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "3e68a713-fb68-4a2d-b30c-f0f8298ae002",
+            "18941415-ff48-4a00-b03f-dfde6940eff3",
+            "bf03a0af-6d77-485f-896f-1d1ec22d7cdb",
+            "bd2188d4-76e0-4720-a576-65511beb3ab2",
+            "8aa0293c-6111-42f8-9a01-1dbac2969047",
+            "7dac491a-784d-430f-b384-910b7cc3538f"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 28302,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
