@@ -2,6 +2,9 @@ const GitHubPage = require( '../../support/GitHubPage');
 const PullRequestPage = require('../../support/PullRequestPage');
 
 describe('Pull Request Workflow', () => {
+
+    
+
     let githubPage;
     const repoName = 'Cypress_Automation'; // Replace with your repository name
     const branchName = 'feature/test-pull-request'; // Replace with your feature branch name
@@ -22,22 +25,28 @@ describe('Pull Request Workflow', () => {
     });
 
     it('should View, review, and merge a pull request', () => {
+
+         pullreqpage = new PullRequestPage();
         // Step 1: Navigate to the Repository
         cy.visit(`https://github.com/ApoorvaTraining/${repoName}`); // Replace with your user/repo
 
         //Navigate to Pull Request tab
-        cy.get('[data-content="Pull requests"]').click();
+        pullreqpage.PullRequestTab().click();
+        //cy.get('[data-content="Pull requests"]').click();
 
-        cy.contains('New pull request').click();  // Click on New Pull Request Button
+        // Click on New Pull Request Button
+        pullreqpage.PullreqNewbutton().click();
+       // cy.contains('New pull request').click();  
 
         cy.wait(1000);
-        cy.get('#head-ref-selector > .btn').click(); // select the head branch to comapare
-        cy.xpath("//span[contains(text(), 'api_automation_tests')]").click(); // Select the Branch from drop down
+        pullreqpage.HeadBranch().click(); // select the head branch to comapare
+        pullreqpage.selectBranch().click();  // Select the API Branch from drop down
+
 
         // Step 2: View Pull Request and Verify Description via Assertin
-        cy.contains('View pull request').click(); // Click on view pull request button
+        pullreqpage.viewPullRequestButton().click(); // Click on view pull request button
         cy.wait(1000);
-        cy.xpath("//div[contains(@class, 'comment-body markdown-body')]")
+        pullreqpage.ReqDescriptionbox()
         .filter(':visible')
         .should('be.visible')
         .invoke('text')
@@ -50,22 +59,20 @@ describe('Pull Request Workflow', () => {
             expect(cleanText).to.equal("This pull request was created for automation testing.");
         });
 
-       // cy.xpath("//div[contains(@class, 'comment-body markdown-body')]").should('have.text',"This pull request was created for automation testing.");
-
 
         // Step 3: Review and Add a comment Pull Request
         cy.wait(100);
-        cy.get('#new_comment_field')
+        pullreqpage.NewCommentButton()
         .should('be.visible')
-        .type("This is a new Pull Request"); // Click on Pull Requests
+        .type("This is a new Pull Request"); //Add New Comment
 
-        cy.xpath("//button[normalize-space(text())='Comment']")
+        pullreqpage.CommentButton()
         .should('be.visible')
         .click(); // Click on comment button
 
         cy.wait(1000);
 
-        cy.xpath("//td[contains(@class, 'd-block comment-body markdown-body')]")
+        pullreqpage.CommentList()
         .filter(':visible')
         .last()
         .should('be.visible')
@@ -78,10 +85,11 @@ describe('Pull Request Workflow', () => {
 
 
         // Step 5: Merge the Pull Request
-        cy.contains('Merge pull request').click(); // Click on Merge button
-        cy.xpath("//button[contains(text(), 'Cancel')]").filter(':visible').click();
-        cy.contains('Merge pull request').click(); // Click on Merge button
-        cy.xpath("//button[contains(text(), 'Confirm merge')]").filter(':visible').click();
-        cy.log("Pull Request Merged Successfully.")
+       
+        pullreqpage.MergeRequest.click();
+        pullreqpage.CancelMerge().click();
+        pullreqpage.MergeRequest.click();
+        pullreqpage.ConfirmMerge().click();
+        cy.log("Pull Request Merged Successfully.");
     });
 });
