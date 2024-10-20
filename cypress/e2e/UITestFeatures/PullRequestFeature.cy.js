@@ -2,48 +2,97 @@ const GitHubPage = require( '../../support/GitHubPage');
 const PullRequestPage = require('../../support/PullRequestPage');
 
 describe('Pull Request Workflow', () => {
+
+    
+
+    let githubPage;
     const repoName = 'Cypress_Automation'; // Replace with your repository name
     const branchName = 'PullRequestFeature'; // Replace with your feature branch name
     const baseBranch = 'main'; // Replace with the base branch to merge into
     const pullRequestTitle = 'Test Pull Request';
     const pullRequestDescription = 'This is a test pull request for Cypress automation.';
 
-    it('should create, review, and merge a pull request', () => {
+    before(() => {
+
+        githubPage = new GitHubPage(); // Create an instance of GitHubPage
+        githubPage.visit(); // Call the visit method
+        githubPage.clickSignIn();
+        githubPage.enterCredentials('apoorvatraining@gmail.com', 'Training#28');
+        githubPage.clickLogin();
+
+        cy.wait(1000);
+        
+    });
+
+    it('should View, review, and merge a pull request', () => {
+
+         pullreqpage = new PullRequestPage();
         // Step 1: Navigate to the Repository
         cy.visit(`https://github.com/ApoorvaTraining/${repoName}`); // Replace with your user/repo
 
         //Navigate to pull Request:
         cy.get('[data-content="Pull requests"]').click();
 
-        // Step 2: Create a New Branch
-        cy.xpath("//span[contains(@class, 'd-none d-md-block') and text()='New pull request']").click();
-        cy.xpath("//summary[contains(@class, 'btn')]//span[contains(text(), 'main')][1]").click(); // Click on branch selector
-        cy.get("//span[contains(text(), 'PullRequestFeature')]").select(branchName);
-        //cy.get('.branch-name').type('{enter}'); // Press enter to create the branch
+        //Navigate to Pull Request tab
+        pullreqpage.PullRequestTab().click();
+        //cy.get('[data-content="Pull requests"]').click();
 
-        // Simulate making changes and pushing to the new branch (this can vary)
-        // This step may require API calls or direct interactions with the UI to add files and commit
+        // Click on New Pull Request Button
+        pullreqpage.PullreqNewbutton().click();
+       // cy.contains('New pull request').click();  
 
-        // Step 3: Create a Pull Request
-        cy.get('a[data-ga-click="Pull requests"]').click(); // Click on Pull Requests
-        cy.get('a[data-ga-click="New pull request"]').click(); // Click on New Pull Request
-        cy.get('.compare-branch').select(branchName); // Select the feature branch for comparison
-        cy.get('#pull_request_title').type(pullRequestTitle); // Set the title
-        cy.get('#pull_request_body').type(pullRequestDescription); // Set the description
-        cy.get('button[data-ga-click="Create pull request"]').click(); // Click on Create Pull Request
+        cy.wait(1000);
+        pullreqpage.HeadBranch().click(); // select the head branch to comapare
+        pullreqpage.selectBranch().click();  // Select the API Branch from drop down
 
-        // Step 4: Review the Pull Request
-        cy.contains(pullRequestTitle).should('exist'); // Verify that the pull request is created
-        cy.contains('Compare changes').should('exist'); // Verify branch comparison
+
+        // Step 2: View Pull Request and Verify Description via Assertin
+        pullreqpage.viewPullRequestButton().click(); // Click on view pull request button
+        cy.wait(1000);
+        pullreqpage.ReqDescriptionbox()
+        .filter(':visible')
+        .should('be.visible')
+        .invoke('text')
+        .then((text) => {
+            const cleanText = text.replace(/\s+/g, ' ').trim();
+
+            cy.log('Original text:', text);
+            cy.log("Trim text", cleanText);
+
+            expect(cleanText).to.equal("This pull request was created for automation testing.");
+        });
+
+
+        // Step 3: Review and Add a comment Pull Request
+        cy.wait(100);
+        pullreqpage.NewCommentButton()
+        .should('be.visible')
+        .type("This is a new Pull Request"); //Add New Comment
+
+        pullreqpage.CommentButton()
+        .should('be.visible')
+        .click(); // Click on comment button
+
+        cy.wait(1000);
+
+        pullreqpage.CommentList()
+        .filter(':visible')
+        .last()
+        .should('be.visible')
+        .invoke('text') // Correctly invoke text to retrieve the comment text
+        .then((commentText) => {
+            const cleanCommentText = commentText.replace(/\s+/g, ' ').trim();
+            cy.log('Comment text:', cleanCommentText);
+            expect(cleanCommentText).to.equal("This is a new Pull Request");
+        });
+
 
         // Step 5: Merge the Pull Request
-        cy.get('button[data-ga-click="Merge pull request"]').click(); // Click on Merge
-        cy.get('button[data-ga-click="Confirm merge"]').click(); // Confirm the merge
-
-        // Step 6: Verify successful merging
-        cy.contains('Merged').should('exist'); // Check for a confirmation message
-
-        // Step 7: Handle Merge Conflicts (if necessary)
-        // You can simulate a conflict scenario here, depending on your setup
+       
+        pullreqpage.MergeRequest.click();
+        pullreqpage.CancelMerge().click();
+        pullreqpage.MergeRequest.click();
+        pullreqpage.ConfirmMerge().click();
+        cy.log("Pull Request Merged Successfully.");
     });
 });
