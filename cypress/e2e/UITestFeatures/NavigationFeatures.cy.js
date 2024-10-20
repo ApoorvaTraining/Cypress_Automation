@@ -21,17 +21,17 @@ describe('Navigation Between Repository Features', () => {
         cy.visit(repoUrl);
     });
 
-    it('should navigate to Code tab and verify content', () => {
+    it('should navigate to Issues tab and verify content', () => {
         verifyPageLoad('Issues',`${repoUrl}/issues`); // Verify key content in "Code" tab
         cy.log("I am in Issues Tab");
     });
 
-    it('should navigate to Code tab and verify content', () => {
+    it('should navigate to Pull Request tab and verify content', () => {
         verifyPageLoad('Pull requests',`${repoUrl}/pulls`); // Verify key content in "Code" tab
         cy.log("I am in Pull Request Tab");
     });
 
-    it('should navigate to Code tab and verify content', () => {
+    it('should navigate to Actions tab and verify content', () => {
         cy.wait(100);
         verifyPageLoad('Actions',`${repoUrl}/actions`); // Verify key content in "Code" tab
         cy.log("I am in Actions Tab");
